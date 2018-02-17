@@ -1,0 +1,9 @@
+<main>
+  <div>
+    <ul>
+      <% @documents_list.each do |doc_name| %>
+        <li><a href="/<%= doc_name%>"><%= doc_name %></a></li>
+      <% end %>
+    </ul>
+  </div>
+</main>

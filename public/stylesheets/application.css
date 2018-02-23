@@ -1,0 +1,64 @@
+a {
+  color: inherit;
+}
+
+a.edit {
+  padding: 5px;
+  color: #174184;
+  text-decoration: underline;
+}
+
+body {
+  font: normal 20px 'Roboto', 'Helvetica', sans-serif;
+  color: #111111;
+  background: #ffffff; 
+}
+
+button {
+  font: normal 14px 'Roboto', 'Helvetica', sans-serif;
+  color: #111111;
+}
+
+.flash {
+  max-width: 960px;
+  padding: 5px 20px;
+  margin: 5px auto 1.5em auto;
+  font-family: 'Roboto', sans-serif;
+}
+
+.flash p {
+  font-size: 14px;
+  font-weight: bold; 
+}
+
+.flash.error {
+  color: #111111;
+  background: #EDDB74; 
+}
+
+.flash.success {
+  color: #111111;
+  background: #EDDB74; 
+}
+
+form.inline {
+  display: inline;
+}
+
+form input {
+  font: normal 14px 'Roboto', 'Helvetica', sans-serif;
+  color: #111111; 
+}
+
+form textarea {
+  width: 85%;
+  height: 250px;
+  font: normal 14px 'Roboto', 'Helvetica', sans-serif;
+  color: #111111;
+  background: #ffffff;
+  border: 1px solid #707172;
+}
+
+input {
+  margin: 10px 10px;
+}

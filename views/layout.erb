@@ -1,9 +1,22 @@
 <!doctype html>
 <html lang="en-US">
   <head>
-    <title>This is the Title</title>
+    <title>Content Management System</title>
+    <link rel="stylesheet" href="/stylesheets/application.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
   </head>
   <body>
+    <% if session[:error] %>
+      <div class ="flash error">
+        <p><%=session.delete(:error)%></p>
+      </div>
+    <% end %>
+
+    <% if session[:success] %>
+      <div class ="flash success">
+        <p><%=session.delete(:success)%></p>
+      </div>
+    <% end %>
     <main>
       <%= yield %>
     </main>

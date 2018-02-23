@@ -1,9 +1,13 @@
-<% if session[:message] %>
-  <p><%=session.delete(:message)%></p>
-<% end %>
-
 <ul>
   <% @documents_list.each do |doc_name| %>
-    <li><a href="/<%= doc_name%>"><%= doc_name %></a><a href="/<%=doc_name%>/edit">   edit</a></li>
+    <li>
+      <a href="/<%= doc_name%>"><%= doc_name %></a>
+      <a class="edit" href="/<%=doc_name%>/edit">edit</a>
+      <form class="inline" method="post" action="/<%=doc_name%>/delete">
+        <button type="submit">delete</button>
+      </form>
+    </li>
   <% end %>
 </ul>
+
+<br/><p><a href="/new">New Document</a></p>

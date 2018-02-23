@@ -1,10 +1,8 @@
-<form action="/<%=@document_name%>" method="post">
+<form action="/<%=params[:file_name]%>" method="post">
   <label for="content">Edit the contents of the document:</label>
   <div>
-    <textarea name="content" id="content" cols="100" rows="20">
-      <%= @document %>
-    </textarea>
+    <textarea name="content" id="content" cols="100" rows="20"><%= @document %></textarea>
   </div>
   <button type="submit">Save Changes</button>
-  <a href="/<%=@document_name%>">Cancel</button>
+  <a class="cancel" href="/<%=@document_name%>">Cancel</a>
 </form>

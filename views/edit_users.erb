@@ -1,0 +1,8 @@
+<form action="/users.yml" method="post">
+  <label for="content">Edit the user information:</label>
+  <div>
+    <textarea name="content" id="content" cols="100" rows="20"><%= @document %></textarea>
+  </div>
+  <button type="submit">Save Changes</button>
+  <a class="cancel" href="/">Cancel</a>
+</form>

@@ -62,3 +62,8 @@ form textarea {
 input {
   margin: 10px 10px;
 }
+
+p.user-status {
+  font-style: italic;
+  font-size: 0.9em;
+}

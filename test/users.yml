@@ -1,0 +1,5 @@
+# test/users.yml
+---
+{
+  admin: $2a$10$V5i/6ileptq4BQ0sleOzB.OpPhlZZWTwFNRVMQI9QPeOP.NIk5oMa
+}

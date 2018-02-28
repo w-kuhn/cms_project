@@ -14,15 +14,15 @@ class File_Based_CMS_Test < Minitest::Test
   end
 
   def setup
-    FileUtils.mkdir_p(root_path)
+    FileUtils.mkdir_p(data_path)
   end
 
   def teardown
-    FileUtils.rm_rf(root_path)
+    FileUtils.rm_rf(data_path)
   end
 
   def create_document(name, content = "")
-    File.open(root_path + name, "w") do |file|
+    File.open(data_path + name, "w") do |file|
       file.write(content)
     end
   end
@@ -212,17 +212,16 @@ class File_Based_CMS_Test < Minitest::Test
 
   def test_sign_in
     post '/users/signin', username: "admin", password: "secret"
-
     assert_equal 302, last_response.status
     assert_equal "Welcome!", session[:success]
     assert_equal "admin", session[:username]
-
+    
     get last_response['Location']
-    assert_includes last_response.body, "Signed in as admin"    
+    assert_includes last_response.body, "Signed in as admin"
   end
 
   def test_sign_out
-    get '/', {}, {"rack.session" => { username: "admin" }}
+    get '/', {}, admin_session
     assert_includes last_response.body, "Signed in as admin"
 
     post '/users/signout'

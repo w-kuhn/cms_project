@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'redcarpet'
 require 'yaml'
+require 'bcrypt'
 
 configure do
   enable :sessions
@@ -13,12 +14,22 @@ def find_file(name)
   @files.find { |file| File.basename(file) == name }
 end
 
-def root_path
+def data_path
   if ENV["RACK_ENV"] == "test"
     Dir.pwd + '/test/data/'
   else
     Dir.pwd + '/data/'
   end
+end
+
+def load_user_credentials
+  credentials_file_path =
+    if ENV["RACK_ENV"] == "test"
+      Dir.pwd + '/test/users.yml'
+    else
+      Dir.pwd + '/users.yml'
+    end
+  YAML.load_file(credentials_file_path)
 end
 
 def load_file_content(document)
@@ -57,8 +68,19 @@ def require_admin_credentials
   end
 end
 
+def valid_credentials?(username, password)
+  credentials = load_user_credentials
+
+  if credentials.key?(username)
+    encrypted_password = BCrypt::Password.new(credentials[username])
+    encrypted_password == password
+  else
+    false
+  end
+end
+
 before do
-  @files = Dir.glob(root_path + '*')
+  @files = Dir.glob(data_path + '*')
 end
 
 get '/' do
@@ -74,13 +96,6 @@ get '/new' do
   require_valid_credentials
 
   erb :new_document, layout: :layout
-end
-
-get '/users.yml/edit' do
-  require_admin_credentials
-
-  @document = File.read(Dir.pwd + '/users.yml')
-  erb :edit_users, layout: :layout
 end
 
 get '/:file_name' do
@@ -113,19 +128,10 @@ post '/create' do
     erb :new_document, layout: :layout
   else
     document_name = params[:document_name].strip
-    File.write(root_path + document_name, "")
+    File.write(data_path + document_name, "")
     session[:success] = "#{document_name} created successfully."
     redirect '/'
   end
-end
-
-post '/users.yml' do
-  require_admin_credentials
-
-  users_document = Dir.pwd + '/users.yml'
-  File.write(users_document, params[:content])
-  session[:success] = "Changes to users.yml saved."
-  redirect '/'
 end
 
 post '/:file_name' do
@@ -148,14 +154,10 @@ post '/:file_name/delete' do
 end
 
 post '/users/signin' do
-  users = YAML.load_file('./users.yml')
-  user = 
-    users.any? do |name, password|
-      params[:username] == name && params[:password] == password
-    end
+  username = params[:username]
 
-  if (params[:username] == 'admin' && params[:password] == 'secret') || user
-    session[:username] = params[:username]
+  if valid_credentials?(username, params[:password])
+    session[:username] = username
     session[:success] = 'Welcome!'
     redirect '/'
   else

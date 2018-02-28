@@ -1,4 +1,6 @@
+---
 {
-  bill: billspassword,
-  sonia: soniaspassword
+  admin: $2a$10$V5i/6ileptq4BQ0sleOzB.OpPhlZZWTwFNRVMQI9QPeOP.NIk5oMa,
+  bill: $2a$10$Pz6MqEifVp8hB/TjqVESQOjX87n85AQUpEGRkLEstP8xwNDZrnWUe,
+  sonia: $2a$10$anNGl7wIiCQKfbkkw6Ee8.KTEwFlDMjYZ1Xal0ZpXFETCDTXuVwA2
 }

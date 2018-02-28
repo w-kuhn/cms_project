@@ -20,9 +20,6 @@
       <button type="submit">Sign Out</button>
     </p>
   </form>
-  <% if session[:username] == "admin" %>
-    <p><a href="/users.yml/edit">Edit Users</a></p>
-  <% end %>
 <% else %>
   <p class="user-status"><a href='/users/signin'>Sign In</a></p>
 <% end %>

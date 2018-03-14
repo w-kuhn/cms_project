@@ -3,6 +3,7 @@ GEM
   specs:
     backports (3.11.1)
     bcrypt (3.1.11)
+    erubis (2.7.0)
     minitest (5.11.3)
     multi_json (1.13.1)
     rack (1.6.8)
@@ -29,6 +30,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  erubis
   minitest
   redcarpet
   sinatra (~> 1.4.7)
